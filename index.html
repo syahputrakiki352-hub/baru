@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiki Saputra | Akuntan & Data Analyst</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Mengimpor font Inter dan Plus Jakarta Sans untuk kombinasi tipografi profesional -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb', // Royal Blue
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        },
+                        dark: '#0f172a', // Deep Slate
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        /* Animasi transisi masuk yang lebih elegan */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-up.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Efek grid background halus */
+        .bg-grid-pattern {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+        }
+        
+        .dark .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-600 dark:bg-dark dark:text-slate-400 transition-colors duration-300">
+
+    <!-- Navbar (Glassmorphism) -->
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/80 dark:bg-dark/80 backdrop-blur-lg border-b border-slate-200/50 dark:border-slate-800/50" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-2xl font-heading font-extrabold text-slate-900 dark:text-white tracking-tighter">
+                        KIKI<span class="text-primary-600">.</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="#home" class="px-4 py-2 text-sm font-medium text-slate-600 hover:text-primary-600 dark:text-slate-300 dark:hover:text-primary-500 transition-colors rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50">Beranda</a>
+                    <a href="#about" class="px-4 py-2 text-sm font-medium text-slate-600 hover:text-primary-600 dark:text-slate-300 dark:hover:text-primary-500 transition-colors rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50">Profil</a>
+                    <a href="#portfolio" class="px-4 py-2 text-sm font-medium text-slate-600 hover:text-primary-600 dark:text-slate-300 dark:hover:text-primary-500 transition-colors rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50">Portofolio</a>
+                    <a href="#certificates" class="px-4 py-2 text-sm font-medium text-slate-600 hover:text-primary-600 dark:text-slate-300 dark:hover:text-primary-500 transition-colors rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50">Lisensi</a>
+                    
+                    <div class="h-5 w-px bg-slate-300 dark:bg-slate-700 mx-2"></div>
+                    
+                    <!-- Dark Mode Toggle -->
+                    <button id="theme-toggle" type="button" class="text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-sm p-2.5 transition-colors focus:outline-none">
+                        <i id="theme-toggle-dark-icon" class="hidden fa-solid fa-moon"></i>
+                        <i id="theme-toggle-light-icon" class="hidden fa-solid fa-sun text-yellow-400"></i>
+                    </button>
+                    
+                    <a href="#contact" class="ml-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-primary-600 dark:hover:bg-primary-50 px-6 py-2.5 rounded-full text-sm font-semibold transition-all shadow-md hover:shadow-lg">Hubungi Saya</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center gap-2">
+                    <button id="theme-toggle-mobile" type="button" class="text-slate-500 dark:text-slate-400 p-2 rounded-lg focus:outline-none">
+                        <i id="theme-toggle-dark-icon-mobile" class="hidden fa-solid fa-moon"></i>
+                        <i id="theme-toggle-light-icon-mobile" class="hidden fa-solid fa-sun text-yellow-400"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-slate-900 dark:text-white focus:outline-none p-2">
+                        <i class="fa-solid fa-bars-staggered text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 dark:bg-dark/95 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 absolute w-full left-0 shadow-xl transition-all">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#home" class="mobile-link block px-4 py-3 rounded-xl text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50">Beranda</a>
+                <a href="#about" class="mobile-link block px-4 py-3 rounded-xl text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50">Profil</a>
+                <a href="#portfolio" class="mobile-link block px-4 py-3 rounded-xl text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50">Portofolio</a>
+                <a href="#certificates" class="mobile-link block px-4 py-3 rounded-xl text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50">Lisensi</a>
+                <a href="#contact" class="mobile-link block px-4 py-3 mt-4 text-center rounded-xl text-base font-semibold bg-slate-900 dark:bg-white text-white dark:text-slate-900">Hubungi Saya</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden min-h-[90vh] flex items-center bg-grid-pattern">
+        <!-- Subtle Glow Orbs (Lebih premium, tidak terlalu terang) -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-600/10 rounded-full blur-[100px] z-0 pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-[100px] z-0 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-8">
+                
+                <!-- Text Content -->
+                <div class="w-full lg:w-3/5 text-center lg:text-left fade-up">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 mb-6 shadow-sm">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                        </span>
+                        <span class="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide">Tersedia untuk proyek baru</span>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold text-slate-900 dark:text-white leading-[1.1] mb-6">
+                        Mengubah <span class="text-primary-600">Data</span> Menjadi <br> Keputusan <span class="text-primary-600">Strategis.</span>
+                    </h1>
+                    
+                    <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+                        Halo, saya <span class="font-semibold text-slate-900 dark:text-slate-200">Kiki Saputra</span>. Seorang <strong>Akuntan & Data Analyst</strong> yang berdedikasi menghasilkan laporan keuangan akurat dan wawasan bisnis mendalam melalui visualisasi data modern.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#portfolio" class="w-full sm:w-auto bg-slate-900 hover:bg-primary-600 dark:bg-white dark:hover:bg-slate-200 text-white dark:text-slate-900 px-8 py-3.5 rounded-xl font-semibold transition-all duration-300 text-center shadow-lg hover:shadow-primary-600/25">
+                            Eksplorasi Karya
+                        </a>
+                        <a href="#contact" class="w-full sm:w-auto bg-white dark:bg-dark text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 px-8 py-3.5 rounded-xl font-semibold transition-all duration-300 text-center shadow-sm">
+                            Konsultasi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Profile Image (Desain Editorial) -->
+                <div class="w-full lg:w-2/5 flex justify-center lg:justify-end fade-up" style="transition-delay: 200ms;">
+                    <div class="relative w-72 h-80 sm:w-80 sm:h-96 lg:w-[400px] lg:h-[480px]">
+                        <!-- Decorative offsets -->
+                        <div class="absolute top-4 left-4 w-full h-full border-2 border-slate-200 dark:border-slate-700 rounded-3xl z-0 transition-transform duration-500 hover:translate-x-2 hover:translate-y-2"></div>
+                        
+                        <!-- Image Container -->
+                        <div class="absolute inset-0 bg-slate-200 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl z-10">
+                            <!-- Foto Profil -->
+                            <img src="gambar.jpg" alt="Kiki Saputra - Akuntan & Data Analyst" class="w-full h-full object-cover object-center grayscale-[20%] hover:grayscale-0 transition-all duration-700">
+                        </div>
+                        
+                        <!-- Floating Badge Profesional -->
+                        <div class="absolute -bottom-6 -left-6 bg-white dark:bg-slate-800 px-6 py-4 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 flex items-center gap-4 z-20 backdrop-blur-md">
+                            <div class="w-12 h-12 bg-primary-50 dark:bg-slate-700 rounded-full flex items-center justify-center text-primary-600 dark:text-primary-400 text-xl">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-slate-500 dark:text-slate-400 font-medium m-0">Fokus Area</p>
+                                <p class="font-heading font-bold text-slate-900 dark:text-white m-0">Finance & Data</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white dark:bg-dark border-t border-slate-100 dark:border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row gap-16 lg:gap-24">
+                
+                <!-- Kiri: Penjelasan -->
+                <div class="w-full md:w-1/2 fade-up">
+                    <span class="text-primary-600 dark:text-primary-500 font-semibold tracking-wider uppercase text-sm mb-3 block">Ringkasan Profesional</span>
+                    <h2 class="text-3xl md:text-4xl font-heading font-bold text-slate-900 dark:text-white mb-6 leading-tight">Presisi dalam Angka, <br>Visi dalam Data.</h2>
+                    
+                    <div class="space-y-4 text-slate-600 dark:text-slate-400 font-light leading-relaxed">
+                        <p>
+                            Sebagai seorang Mahasiswa di bidang Akuntansi dan Analisis Data, saya menggabungkan ketelitian ilmu keuangan dengan kekuatan teknologi modern. Saya tidak hanya mencatat transaksi, tetapi menerjemahkannya menjadi narasi bisnis yang dapat ditindaklanjuti.
+                        </p>
+                        <p>
+                            Spesialisasi saya mencakup implementasi dan optimalisasi sistem ERP/Akuntansi (seperti ABSS & Accurate), pengelolaan database, serta perancangan <i>dashboard</i> interaktif tingkat eksekutif menggunakan Tableau dan Looker Studio.
+                        </p>
+                    </div>
+
+                    <div class="mt-8">
+                        <a href="#contact" class="group inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-semibold transition-colors">
+                            Mari Berdiskusi 
+                            <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Kanan: Kompetensi (Progress Bars Tipis & Modern) -->
+                <div class="w-full md:w-1/2 fade-up" style="transition-delay: 200ms;">
+                    <div class="bg-slate-50 dark:bg-slate-800/30 p-8 rounded-3xl border border-slate-100 dark:border-slate-700/50 h-full">
+                        <h3 class="text-xl font-heading font-bold text-slate-900 dark:text-white mb-8">Kompetensi Inti</h3>
+                        
+                        <div class="space-y-7">
+                            <!-- Skill 1 -->
+                            <div class="group">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Data Visualization (Tableau, Looker Studio)</span>
+                                    <span class="text-sm font-medium text-slate-500 dark:text-slate-400">95%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                                    <div class="bg-primary-600 h-1.5 rounded-full transform origin-left transition-transform duration-1000 group-hover:scale-x-105" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <!-- Skill 2 -->
+                            <div class="group">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Accounting Systems (ABSS, Accurate)</span>
+                                    <span class="text-sm font-medium text-slate-500 dark:text-slate-400">90%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                                    <div class="bg-primary-600 h-1.5 rounded-full transform origin-left transition-transform duration-1000 group-hover:scale-x-105" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <!-- Skill 3 -->
+                            <div class="group">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Data Analysis & SQL</span>
+                                    <span class="text-sm font-medium text-slate-500 dark:text-slate-400">85%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                                    <div class="bg-primary-600 h-1.5 rounded-full transform origin-left transition-transform duration-1000 group-hover:scale-x-105" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <!-- Skill 4 -->
+                            <div class="group">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Web Development (HTML, CSS, JS)</span>
+                                    <span class="text-sm font-medium text-slate-500 dark:text-slate-400">80%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                                    <div class="bg-primary-600 h-1.5 rounded-full transform origin-left transition-transform duration-1000 group-hover:scale-x-105" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 bg-slate-50 dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 fade-up">
+                <div class="max-w-2xl">
+                    <span class="text-primary-600 dark:text-primary-500 font-semibold tracking-wider uppercase text-sm mb-3 block">Portofolio Kinerja</span>
+                    <h2 class="text-3xl md:text-4xl font-heading font-bold text-slate-900 dark:text-white mb-4">Studi Kasus & <br>Penyelesaian Masalah.</h2>
+                </div>
+                <div class="mt-6 md:mt-0 pb-2">
+                    <a href="#" class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Lihat Semua Proyek <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Portfolio Grid (Gaya Kartu Modern & Bersih) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project 1: Google Data Studio (Featured - Col Span 2 on large screens if desired, but let's keep it uniform for now) -->
+                <div class="group bg-white dark:bg-dark rounded-2xl overflow-hidden shadow-soft hover:shadow-xl transition-all duration-300 border border-slate-200/60 dark:border-slate-800 fade-up">
+                    <div class="relative aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800">
+                        <img src="Google Studio.jpg">
+                        <div class="absolute top-4 left-4 bg-white/90 dark:bg-dark/90 backdrop-blur-sm px-3 py-1.5 rounded-lg text-xs font-bold text-slate-900 dark:text-white shadow-sm border border-slate-200 dark:border-slate-700">
+                            Looker Studio
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-heading font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">Dashboard Penjualan Pertamina</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-5 line-clamp-3 leading-relaxed">
+                            Membangun dashboard analitik interaktif untuk melacak penjualan bulanan (Total Rp 520+ Juta). Memvisualisasikan pencapaian target, performa sales, metrik kepuasan (78%), dan kontribusi <i>Customer</i> B2B utama seperti PT Adjimaju.
+                        </p>
+                        <a href="#" class="text-sm font-semibold text-primary-600 dark:text-primary-500 hover:underline flex items-center gap-1">
+                            Lihat Detail <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2: Tableau -->
+                <div class="group bg-white dark:bg-dark rounded-2xl overflow-hidden shadow-soft hover:shadow-xl transition-all duration-300 border border-slate-200/60 dark:border-slate-800 fade-up" style="transition-delay: 100ms;">
+                    <div class="relative aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800">
+                        <img src="tableu.jpg" alt="Tableau Dashboard" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute top-4 left-4 bg-white/90 dark:bg-dark/90 backdrop-blur-sm px-3 py-1.5 rounded-lg text-xs font-bold text-slate-900 dark:text-white shadow-sm border border-slate-200 dark:border-slate-700">
+                            Tableau
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-heading font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">Dashboard Analisis Ritel (Walmart)</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-5 line-clamp-3 leading-relaxed">
+                            Membangun visualisasi data interaktif untuk menganalisis tren ritel historis. Berfokus pada penemuan korelasi antara performa toko dengan faktor makroekonomi seperti fluktuasi harga bahan bakar (<i>Fuel Price</i>), tingkat pengangguran (<i>Unemployment</i>), serta dampak hari libur (<i>Holiday Flag</i>) setiap bulannya.
+                        </p>
+                        <a href="#" class="text-sm font-semibold text-primary-600 dark:text-primary-500 hover:underline flex items-center gap-1">
+                            Lihat Detail <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3: ABSS -->
+                <div class="group bg-white dark:bg-dark rounded-2xl overflow-hidden shadow-soft hover:shadow-xl transition-all duration-300 border border-slate-200/60 dark:border-slate-800 fade-up" style="transition-delay: 200ms;">
+                    <div class="relative aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800">
+                        <img src="abss.jpg" alt="ABSS" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute top-4 left-4 bg-white/90 dark:bg-dark/90 backdrop-blur-sm px-3 py-1.5 rounded-lg text-xs font-bold text-slate-900 dark:text-white shadow-sm border border-slate-200 dark:border-slate-700">
+                            ABSS / MYOB
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-heading font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">Sistem Pelaporan Keuangan (ABSS)</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-5 line-clamp-3 leading-relaxed">
+                            Mengelola siklus akuntansi end-to-end menggunakan sistem ABSS/MYOB. Berpengalaman penuh dalam menerbitkan berbagai laporan krusial, meliputi: Income Statement (Accrual), Standard Balance Sheet, Reconciliation Report & Summary, All Sales, hingga Account & Item Transactions untuk keperluan audit bisnis.
+                        </p>
+                        <a href="#" class="text-sm font-semibold text-primary-600 dark:text-primary-500 hover:underline flex items-center gap-1">
+                            Lihat Detail <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4: Web Dev -->
+                <div class="group bg-white dark:bg-dark rounded-2xl overflow-hidden shadow-soft hover:shadow-xl transition-all duration-300 border border-slate-200/60 dark:border-slate-800 fade-up">
+                    <div class="relative aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800">
+                        <img src="website.jpg" alt="Website Ni Barokah" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute top-4 left-4 bg-white/90 dark:bg-dark/90 backdrop-blur-sm px-3 py-1.5 rounded-lg text-xs font-bold text-slate-900 dark:text-white shadow-sm border border-slate-200 dark:border-slate-700">
+                            Web & AI Integration
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-heading font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">Website Tani Barokah</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-5 line-clamp-3 leading-relaxed">
+                            Platform inovatif yang dirancang khusus untuk membantu produktivitas para petani. Website ini dilengkapi dengan fitur kalkulator untuk mempermudah perhitungan kewajiban zakat hasil pertanian, serta integrasi teknologi AI cerdas untuk mengecek kondisi dan kesehatan tanaman.
+                        </p>
+                        <a href="https://tani-barokah-kik.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-primary-600 dark:text-primary-500 hover:underline flex items-center gap-1">
+                            Kunjungi Website <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 5: Accurate -->
+                <div class="group bg-white dark:bg-dark rounded-2xl overflow-hidden shadow-soft hover:shadow-xl transition-all duration-300 border border-slate-200/60 dark:border-slate-800 fade-up" style="transition-delay: 100ms;">
+                    <div class="relative aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800">
+                        <img src="accurate.jpg" alt="Accurate Accounting" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute top-4 left-4 bg-white/90 dark:bg-dark/90 backdrop-blur-sm px-3 py-1.5 rounded-lg text-xs font-bold text-slate-900 dark:text-white shadow-sm border border-slate-200 dark:border-slate-700">
+                            Accurate 5 / Online
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-heading font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">Jurnal Toko Berkah Hijab (Accurate)</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-5 line-clamp-3 leading-relaxed">
+                            Mengelola dan menginput pencatatan siklus akuntansi untuk bisnis retail (Toko Berkah Hijab) menggunakan sistem Accurate. Meliputi Jurnal Umum, Penyesuaian Persediaan (Hijab Segi Empat, Pashmina, Gamis Syar'i), Aset Tetap, dan Saldo Awal Akun dengan total transaksi awal ekuitas mencapai Rp 600.000.000.
+                        </p>
+                        <a href="#" class="text-sm font-semibold text-primary-600 dark:text-primary-500 hover:underline flex items-center gap-1">
+                            Lihat Detail <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="py-24 bg-white dark:bg-dark border-t border-slate-100 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="max-w-5xl mx-auto">
+                <!-- Premium Showcase Card -->
+                <div class="relative rounded-[2.5rem] overflow-hidden bg-slate-900 fade-up shadow-2xl">
+                    
+                    <!-- Background Effects -->
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                    <div class="absolute top-0 right-0 w-[30rem] h-[30rem] bg-primary-600/30 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
+                    <div class="absolute bottom-0 left-0 w-[20rem] h-[20rem] bg-indigo-500/20 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4"></div>
+                    
+                    <div class="relative z-10 flex flex-col md:flex-row items-center p-10 md:p-16 lg:p-20 gap-12">
+                        
+                        <!-- Icon/Badge Left side -->
+                        <div class="w-full md:w-1/3 flex justify-center">
+                            <div class="relative w-40 h-40 flex items-center justify-center">
+                                <div class="absolute inset-0 border-2 border-white/20 rounded-full animate-[spin_15s_linear_infinite]"></div>
+                                <div class="absolute inset-4 border border-white/10 rounded-full animate-[spin_20s_linear_infinite_reverse]"></div>
+                                <div class="w-24 h-24 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                                    <i class="fa-solid fa-medal text-5xl text-white"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Content Right side -->
+                        <div class="w-full md:w-2/3 text-center md:text-left">
+                            <span class="inline-block px-4 py-1.5 bg-white/10 border border-white/20 backdrop-blur-sm rounded-full text-xs font-semibold text-primary-200 tracking-widest uppercase mb-6">Terverifikasi</span>
+                            
+                            <h3 class="text-3xl lg:text-4xl font-heading font-extrabold text-white mb-6 leading-tight">
+                                Kredensial & <br>Lisensi Profesional.
+                            </h3>
+                            
+                            <p class="text-slate-300 text-lg mb-10 font-light leading-relaxed max-w-xl mx-auto md:mx-0">
+                                Berkomitmen pada standar tertinggi. Portofolio sertifikasi yang memvalidasi kompetensi mendalam di bidang <strong>Data Analytics, Visualisasi Data, dan Manajemen Sistem Akuntansi</strong> dari berbagai lembaga tersertifikasi.
+                            </p>
+                            
+                            <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                                <a href="#" class="bg-primary-600 hover:bg-primary-500 text-white px-8 py-3.5 rounded-xl font-semibold transition-all shadow-lg hover:shadow-primary-600/40 flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-folder-open"></i> Buka Dokumen
+                                </a>
+                                <a href="#" class="bg-transparent border border-white/30 text-white hover:bg-white/10 px-8 py-3.5 rounded-xl font-medium transition-all flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-download"></i> Unduh Arsip (ZIP)
+                                </a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-slate-50 dark:bg-slate-900/50 border-t border-slate-100 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-16 fade-up">
+                <span class="text-primary-600 dark:text-primary-500 font-semibold tracking-wider uppercase text-sm mb-3 block">Hubungi Saya</span>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-slate-900 dark:text-white mb-4">Mari Bangun Kolaborasi.</h2>
+                <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-light">Tinggalkan pesan Anda, dan saya akan merespons sesegera mungkin untuk membahas peluang atau kebutuhan bisnis Anda.</p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-12 max-w-6xl mx-auto">
+                
+                <!-- Contact Info -->
+                <div class="w-full lg:w-5/12 space-y-6 fade-up">
+                    <!-- Email Card -->
+                    <div class="bg-white dark:bg-dark p-6 rounded-2xl border border-slate-200/60 dark:border-slate-800 flex items-start gap-5 shadow-soft">
+                        <div class="w-12 h-12 bg-primary-50 dark:bg-slate-800 rounded-xl flex items-center justify-center text-primary-600 dark:text-primary-400 flex-shrink-0">
+                            <i class="fa-regular fa-envelope text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-heading font-semibold text-slate-900 dark:text-white mb-1">Email Surel</h4>
+                            <a href="mailto:syahputrakiki352@gmail.com" class="text-slate-600 dark:text-slate-400 text-sm hover:text-primary-600 dark:hover:text-primary-400 transition-colors">syahputrakiki352@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <!-- LinkedIn Card -->
+                    <div class="bg-white dark:bg-dark p-6 rounded-2xl border border-slate-200/60 dark:border-slate-800 flex items-start gap-5 shadow-soft">
+                        <div class="w-12 h-12 bg-primary-50 dark:bg-slate-800 rounded-xl flex items-center justify-center text-primary-600 dark:text-primary-400 flex-shrink-0">
+                            <i class="fa-brands fa-linkedin-in text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-heading font-semibold text-slate-900 dark:text-white mb-1">LinkedIn</h4>
+                            <a href="https://www.linkedin.com/in/kiki-saputra-5902b130a" target="_blank" rel="noopener noreferrer" class="text-slate-600 dark:text-slate-400 text-sm hover:text-primary-600 dark:hover:text-primary-400 transition-colors break-all">linkedin.com/in/kiki-saputra-5902b130a</a>
+                        </div>
+                    </div>
+
+                    <!-- Location Card -->
+                    <div class="bg-white dark:bg-dark p-6 rounded-2xl border border-slate-200/60 dark:border-slate-800 flex items-start gap-5 shadow-soft">
+                        <div class="w-12 h-12 bg-primary-50 dark:bg-slate-800 rounded-xl flex items-center justify-center text-primary-600 dark:text-primary-400 flex-shrink-0">
+                            <i class="fa-solid fa-location-dot text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-heading font-semibold text-slate-900 dark:text-white mb-1">Lokasi & Domisili</h4>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm">Sentul City, Kab. Bogor <br>Jawa Barat, Indonesia</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="w-full lg:w-7/12 fade-up" style="transition-delay: 100ms;">
+                    <form id="contact-form" class="bg-white dark:bg-dark p-8 md:p-10 rounded-3xl border border-slate-200/60 dark:border-slate-800 shadow-xl" onsubmit="event.preventDefault(); showMessage();">
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Nama Lengkap</label>
+                                <input type="text" id="name" required class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-all placeholder-slate-400" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Alamat Email</label>
+                                <input type="email" id="email" required class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-all placeholder-slate-400" placeholder="john@perusahaan.com">
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="subject" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Subjek Pesan</label>
+                            <input type="text" id="subject" required class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-all placeholder-slate-400" placeholder="Tawaran Proyek / Konsultasi">
+                        </div>
+
+                        <div class="mb-8">
+                            <label for="message" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Pesan Anda</label>
+                            <textarea id="message" rows="4" required class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-all placeholder-slate-400 resize-none" placeholder="Ceritakan tentang kebutuhan Anda..."></textarea>
+                        </div>
+
+                        <!-- Pesan Sukses (Tersembunyi secara default) -->
+                        <div id="success-message" class="hidden mb-6 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 px-4 py-3 rounded-lg border border-green-200 dark:border-green-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> Pesan berhasil dikirim. Saya akan segera membalasnya!
+                        </div>
+
+                        <button type="submit" class="w-full bg-slate-900 hover:bg-primary-600 dark:bg-white dark:hover:bg-slate-200 text-white dark:text-slate-900 font-semibold py-3.5 px-6 rounded-xl transition-colors duration-300 flex items-center justify-center gap-2 shadow-md">
+                            Kirim Pesan <i class="fa-regular fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                
+                <div class="text-center md:text-left">
+                    <a href="#" class="text-2xl font-heading font-extrabold text-white tracking-tighter mb-2 block">KIKI<span class="text-primary-500">.</span></a>
+                    <p class="text-sm">Menyajikan akurasi, mengarahkan strategi.</p>
+                </div>
+                
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-800/50 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all text-slate-300 border border-slate-700"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/kiki-saputra-5902b130a" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg bg-slate-800/50 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all text-slate-300 border border-slate-700"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="mailto:syahputrakiki352@gmail.com" class="w-10 h-10 rounded-lg bg-slate-800/50 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all text-slate-300 border border-slate-700"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center text-sm font-medium">
+                <p>&copy; <span id="year"></span> Kiki Saputra. Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Update tahun otomatis
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Navbar Scroll Effect (Blur & Shadow)
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-soft');
+                navbar.classList.replace('border-slate-200/50', 'border-slate-200');
+            } else {
+                navbar.classList.remove('shadow-soft');
+                navbar.classList.replace('border-slate-200', 'border-slate-200/50');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const menuIcon = btn.querySelector('i');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            if(menu.classList.contains('hidden')){
+                menuIcon.classList.replace('fa-xmark', 'fa-bars-staggered');
+            } else {
+                menuIcon.classList.replace('fa-bars-staggered', 'fa-xmark');
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                menuIcon.classList.replace('fa-xmark', 'fa-bars-staggered');
+            });
+        });
+
+        // Intersection Observer untuk animasi scroll yang elegan
+        const faders = document.querySelectorAll('.fade-up');
+        const appearOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                    observer.unobserve(entry.target); // Hanya animasi sekali
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+
+        // Simulasi Form Kontak (Tanpa alert)
+        function showMessage() {
+            const btn = document.querySelector('button[type="submit"]');
+            const msg = document.getElementById('success-message');
+            
+            // UI Loading state
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = 'Memproses... <i class="fa-solid fa-circle-notch fa-spin"></i>';
+            btn.disabled = true;
+            btn.classList.add('opacity-80', 'cursor-not-allowed');
+
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+                btn.classList.remove('opacity-80', 'cursor-not-allowed');
+                document.getElementById('contact-form').reset();
+                
+                // Munculkan pesan
+                msg.classList.remove('hidden');
+                msg.classList.add('flex');
+                
+                // Hilangkan pesan setelah 5 detik
+                setTimeout(() => {
+                    msg.classList.add('hidden');
+                    msg.classList.remove('flex');
+                }, 5000);
+            }, 1500);
+        }
+
+        // Dark Mode Logic (Premium Implementation)
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        const themeToggleDarkIconMobile = document.getElementById('theme-toggle-dark-icon-mobile');
+        const themeToggleLightIconMobile = document.getElementById('theme-toggle-light-icon-mobile');
+        
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleBtnMobile = document.getElementById('theme-toggle-mobile');
+
+        function setIconTheme(theme) {
+            if (theme === 'dark') {
+                themeToggleLightIcon.classList.remove('hidden');
+                themeToggleDarkIcon.classList.add('hidden');
+                themeToggleLightIconMobile.classList.remove('hidden');
+                themeToggleDarkIconMobile.classList.add('hidden');
+            } else {
+                themeToggleLightIcon.classList.add('hidden');
+                themeToggleDarkIcon.classList.remove('hidden');
+                themeToggleLightIconMobile.classList.add('hidden');
+                themeToggleDarkIconMobile.classList.remove('hidden');
+            }
+        }
+
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            setIconTheme('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            setIconTheme('light');
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+                setIconTheme('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+                setIconTheme('dark');
+            }
+        }
+
+        themeToggleBtn.addEventListener('click', toggleTheme);
+        themeToggleBtnMobile.addEventListener('click', toggleTheme);
+    </script>
+</body>
+</html>
